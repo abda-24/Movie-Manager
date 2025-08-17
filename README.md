@@ -37,15 +37,4 @@ This Angular application demonstrates the implementation of an **AddMovieCompone
    ```bash
    npm install
 **
-src/app/
- ├── components/
- │   ├── add-movie/          # Main AddMovieComponent
- │   └── movie-list/         # Movie list display
- ├── models/
- │   └── movie.model.ts      # Movie interface
- ├── services/
- │   └── movie.service.ts    # Movie data service
- ├── enums/
- │   ├── movie-category.enum.ts
- │   └── movie-rating.enum.ts
- └── app.routes.ts           # Routing configuration
+
