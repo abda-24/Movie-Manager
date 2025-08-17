@@ -1,0 +1,50 @@
+<div class="movie-list-container">
+  <div class="header">
+    <h1>Movie Collection</h1>
+    <button class="btn btn-primary" (click)="onAddMovie()">
+      Add New Movie
+    </button>
+  </div>
+
+  <div class="movies-content" *ngIf="movies.length > 0; else noMovies">
+    <div class="movies-grid">
+      <div class="movie-card" *ngFor="let movie of movies">
+        <div class="movie-header">
+          <h3>{{ movie.title }}</h3>
+          <span class="rating-badge">{{ movie.rating }}</span>
+        </div>
+        
+        <div class="movie-details">
+          <p><strong>Director:</strong> {{ movie.director }}</p>
+          <p><strong>Year:</strong> {{ movie.releaseYear }}</p>
+          <p><strong>Category:</strong> {{ movie.category }}</p>
+          <p *ngIf="movie.duration"><strong>Duration:</strong> {{ movie.duration }} minutes</p>
+        </div>
+        
+        <div class="movie-description" *ngIf="movie.description">
+          <p>{{ movie.description }}</p>
+        </div>
+        
+        <div class="movie-actions">
+          <button 
+            class="btn btn-danger btn-small" 
+            (click)="onDeleteMovie(movie.id)"
+            title="Delete movie"
+          >
+            Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noMovies>
+    <div class="no-movies">
+      <h3>No movies in your collection yet</h3>
+      <p>Start building your movie collection by adding your first movie!</p>
+      <button class="btn btn-primary" (click)="onAddMovie()">
+        Add Your First Movie
+      </button>
+    </div>
+  </ng-template>
+</div>

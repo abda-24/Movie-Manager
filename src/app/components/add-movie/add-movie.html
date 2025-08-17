@@ -1,0 +1,146 @@
+<div class="add-movie-container">
+  <div class="form-card">
+    <h2>Add New Movie</h2>
+    
+    <form [formGroup]="movieForm" (ngSubmit)="onSubmit()" novalidate>
+      <!-- Title Field -->
+      <div class="form-group">
+        <label for="title">Title *</label>
+        <input
+          type="text"
+          id="title"
+          formControlName="title"
+          [class.error]="isFieldInvalid('title')"
+          placeholder="Enter movie title"
+        />
+        <div class="error-message" *ngIf="isFieldInvalid('title')">
+          {{ getFieldError('title') }}
+        </div>
+      </div>
+
+      <!-- Director Field -->
+      <div class="form-group">
+        <label for="director">Director *</label>
+        <input
+          type="text"
+          id="director"
+          formControlName="director"
+          [class.error]="isFieldInvalid('director')"
+          placeholder="Enter director name"
+        />
+        <div class="error-message" *ngIf="isFieldInvalid('director')">
+          {{ getFieldError('director') }}
+        </div>
+      </div>
+
+      <!-- Release Year Field -->
+      <div class="form-group">
+        <label for="releaseYear">Release Year *</label>
+        <input
+          type="number"
+          id="releaseYear"
+          formControlName="releaseYear"
+          [class.error]="isFieldInvalid('releaseYear')"
+          placeholder="Enter release year"
+          min="1900"
+          [max]="2030"
+        />
+        <div class="error-message" *ngIf="isFieldInvalid('releaseYear')">
+          {{ getFieldError('releaseYear') }}
+        </div>
+      </div>
+
+      <!-- Category Dropdown -->
+      <div class="form-group">
+        <label for="category">Category *</label>
+        <select
+          id="category"
+          formControlName="category"
+          [class.error]="isFieldInvalid('category')"
+        >
+          <option value="">Select a category</option>
+          <option *ngFor="let category of movieCategories" [value]="category">
+            {{ category }}
+          </option>
+        </select>
+        <div class="error-message" *ngIf="isFieldInvalid('category')">
+          {{ getFieldError('category') }}
+        </div>
+      </div>
+
+      <!-- Rating Dropdown -->
+      <div class="form-group">
+        <label for="rating">Rating *</label>
+        <select
+          id="rating"
+          formControlName="rating"
+          [class.error]="isFieldInvalid('rating')"
+        >
+          <option value="">Select a rating</option>
+          <option *ngFor="let rating of movieRatings" [value]="rating">
+            {{ rating }}
+          </option>
+        </select>
+        <div class="error-message" *ngIf="isFieldInvalid('rating')">
+          {{ getFieldError('rating') }}
+        </div>
+      </div>
+
+      <!-- Duration Field -->
+      <div class="form-group">
+        <label for="duration">Duration (minutes)</label>
+        <input
+          type="number"
+          id="duration"
+          formControlName="duration"
+          [class.error]="isFieldInvalid('duration')"
+          placeholder="Enter duration in minutes"
+          min="1"
+          max="600"
+        />
+        <div class="error-message" *ngIf="isFieldInvalid('duration')">
+          {{ getFieldError('duration') }}
+        </div>
+      </div>
+
+      <!-- Description Field -->
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea
+          id="description"
+          formControlName="description"
+          [class.error]="isFieldInvalid('description')"
+          placeholder="Enter movie description (optional)"
+          rows="4"
+          maxlength="500"
+        ></textarea>
+        <div class="error-message" *ngIf="isFieldInvalid('description')">
+          {{ getFieldError('description') }}
+        </div>
+        <div class="character-count">
+          {{ movieForm.get('description')?.value?.length || 0 }}/500 characters
+        </div>
+      </div>
+
+      <!-- Form Actions -->
+      <div class="form-actions">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="onCancel()"
+          [disabled]="isSubmitting"
+        >
+          Cancel
+        </button>
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="movieForm.invalid || isSubmitting"
+        >
+          <span *ngIf="isSubmitting">Adding...</span>
+          <span *ngIf="!isSubmitting">Add Movie</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
